@@ -1,36 +1,40 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { DataSource } from '../../../../lib/data-source/data-source';
-import { Column } from '../../../../lib/data-set/column';
+import { DataSource } from '../../lib/data-source/data-source';
+import { Column } from '../../lib/data-set/column';
 
 @Component({
   selector: 'ng2-smart-table-title',
-  styleUrls: ['./title.component.scss'],
+  // styleUrls: ['title.scss'],
   template: `
-    <a href="#" *ngIf="column.isSortable"
-                (click)="_sort($event, column)" 
-                class="ng2-smart-sort-link sort"
-                [ngClass]="currentDirection">
+    <a href="#"
+      *ngIf="column.isSortable"
+      (click)="_sort($event, column)"
+      class="ng2-smart-sort-link sort"
+      [ngClass]="currentDirection">
       {{ column.title }}
     </a>
     <span class="ng2-smart-sort" *ngIf="!column.isSortable">{{ column.title }}</span>
   `
 })
-export class TitleComponent implements OnInit {
+export class TitleComponent {
 
-  currentDirection = '';
   @Input() column: Column;
   @Input() source: DataSource;
+
   @Output() sort = new EventEmitter<any>();
 
-  ngOnInit() {
+  currentDirection = '';
+
+  ngOnInit(): void {
     this.source.onChanged().subscribe((elements) => {
       let sortConf = this.source.getSort();
 
-      if (sortConf.length > 0 && sortConf[0]['field'] === this.column.id)
+      if (sortConf.length > 0 && sortConf[0]['field'] === this.column.id) {
         this.currentDirection = sortConf[0]['direction'];
-      else
+      } else {
         this.currentDirection = '';
+      }
 
       sortConf.forEach((fieldConf) => {
 
@@ -38,8 +42,7 @@ export class TitleComponent implements OnInit {
     });
   }
 
-  _sort(event: any) {
-    event.preventDefault();
+  _sort(): boolean {
     this.changeSortDirection();
     this.source.setSort([
       {
@@ -49,6 +52,7 @@ export class TitleComponent implements OnInit {
       }
     ]);
     this.sort.emit(null);
+    return false;
   }
 
   changeSortDirection(): string {

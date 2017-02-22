@@ -4,7 +4,7 @@ import { DefaultEditor } from './default-editor';
 
 @Component({
   selector: 'input-editor',
-  styleUrls: ['./editor.component.scss'],
+  // styleUrls: ['./editor.component.scss'],
   template: `
     <input [ngClass]="inputClass"
            class="form-control"
