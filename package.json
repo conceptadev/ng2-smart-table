@@ -1,23 +1,60 @@
 {
-  "name": "ng2-smart-table",
-  "version": "0.5.3-0",
-  "description": "Angular 2 Smart Table",
-  "author": "akveo",
-  "homepage": "http://akveo.github.io/ng2-smart-table/",
-  "license": "MIT",
-  "main": "./ng2-smart-table.js",
-  "typings": "./ng2-smart-table.d.ts",
+  "_args": [
+    [
+      {
+        "raw": "ng2-smart-table@^0.5.3-0",
+        "scope": null,
+        "escapedName": "ng2-smart-table",
+        "name": "ng2-smart-table",
+        "rawSpec": "^0.5.3-0",
+        "spec": ">=0.5.3-0 <0.6.0",
+        "type": "range"
+      },
+      "/Users/henryoliver/Projects/Concepta/YellowStone/Development/yellowstone-app"
+    ]
+  ],
+  "_from": "ng2-smart-table@>=0.5.3-0 <0.6.0",
+  "_id": "ng2-smart-table@0.5.3-0",
+  "_inCache": true,
+  "_location": "/ng2-smart-table",
+  "_nodeVersion": "6.9.5",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ng2-smart-table-0.5.3-0.tgz_1486545506509_0.7420356180518866"
+  },
+  "_npmUser": {
+    "name": "akveo",
+    "email": "contact@akveo.com"
+  },
+  "_npmVersion": "4.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ng2-smart-table@^0.5.3-0",
+    "scope": null,
+    "escapedName": "ng2-smart-table",
+    "name": "ng2-smart-table",
+    "rawSpec": "^0.5.3-0",
+    "spec": ">=0.5.3-0 <0.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ng2-smart-table/-/ng2-smart-table-0.5.3-0.tgz",
+  "_shasum": "8d2ae8bcfe935dc84f1c8fbdabffcf79d1001c5b",
+  "_shrinkwrap": null,
+  "_spec": "ng2-smart-table@^0.5.3-0",
+  "_where": "/Users/henryoliver/Projects/Concepta/YellowStone/Development/yellowstone-app",
+  "author": {
+    "name": "akveo"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/ng2-smart-table/issues"
+  },
   "dependencies": {
     "ng2-completer": "^1.0.0"
   },
-  "save-prefix": "^",
-  "peerDependencies": {
-    "@angular/common": "2.4.4",
-    "@angular/compiler": "2.4.4",
-    "@angular/core": "2.4.4",
-    "@angular/forms": "2.4.4",
-    "rxjs": "~5.0.2"
-  },
+  "description": "Angular 2 Smart Table",
   "devDependencies": {
     "@angular/common": "2.4.4",
     "@angular/compiler": "2.4.4",
@@ -93,54 +130,88 @@
     "webpack-merge": "2.4.0",
     "zone.js": "~0.7.4"
   },
+  "directories": {},
+  "dist": {
+    "shasum": "8d2ae8bcfe935dc84f1c8fbdabffcf79d1001c5b",
+    "tarball": "https://registry.npmjs.org/ng2-smart-table/-/ng2-smart-table-0.5.3-0.tgz"
+  },
+  "engines": {
+    "node": ">= 5.4.1 < 7"
+  },
+  "gitHead": "62883c34aa57424b775a00fe358ccef532a9efa8",
+  "homepage": "http://akveo.github.io/ng2-smart-table/",
+  "license": "MIT",
+  "main": "./ng2-smart-table.js",
+  "maintainers": [
+    {
+      "name": "akveo",
+      "email": "contact@akveo.com"
+    }
+  ],
+  "name": "ng2-smart-table",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "2.4.4",
+    "@angular/compiler": "2.4.4",
+    "@angular/core": "2.4.4",
+    "@angular/forms": "2.4.4",
+    "rxjs": "~5.0.2"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/ng2-smart-table.git"
+  },
+  "save-prefix": "^",
   "scripts": {
-    "rimraf": "rimraf",
-    "tslint": "tslint",
-    "typedoc": "typedoc",
-    "webpack": "webpack",
-    "webpack-dev-server": "webpack-dev-server",
-    "webdriver-manager": "webdriver-manager",
-    "clean": "npm cache clean && npm run rimraf -- node_modules doc coverage dist",
-    "clean:dist": "npm run rimraf -- demo-dist",
-    "clean:compiled": "npm run rimraf -- compiled",
-    "preclean:install": "npm run clean",
-    "clean:install": "npm set progress=false && npm install",
-    "preclean:start": "npm run clean",
-    "clean:start": "npm start",
-    "watch": "npm run watch:dev",
-    "watch:dev": "npm run build:dev -- --watch",
-    "watch:dev:hmr": "npm run watch:dev -- --hot",
-    "watch:prod": "npm run build:prod -- --watch",
-    "build": "npm run build:package",
-    "prebuild:dev": "npm run clean:dist",
-    "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
-    "prebuild:prod": "npm run clean:dist",
-    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --bail",
-    "build:aot:prod": "npm run clean:dist && npm run clean:compiled && webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "build": "npm run build:dev",
     "build:aot": "npm run build:aot:prod",
+    "build:aot:prod": "npm run clean:dist && npm run clean:compiled && webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
+    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "clean": "npm cache clean && npm run rimraf -- node_modules doc coverage dist",
+    "clean:compiled": "npm run rimraf -- compiled",
+    "clean:dist": "npm run rimraf -- demo-dist",
+    "clean:install": "npm set progress=false && npm install",
+    "clean:start": "npm start",
+    "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
+    "gh-pages": "npm run build:prod && gh-pages -d demo-dist",
+    "lint": "npm run tslint \"src/**/*.ts\"",
+    "prebuild:dev": "npm run clean:dist",
+    "prebuild:prod": "npm run clean:dist",
+    "preclean:install": "npm run clean",
+    "preclean:start": "npm run clean",
+    "pree2e": "npm run webdriver:update -- --standalone",
+    "prepublish": "ngc -p tsconfig-aot.json",
+    "pretest": "npm run lint",
+    "rimraf": "rimraf",
     "server": "npm run server:dev",
     "server:dev": "webpack-dev-server --config config/webpack.dev.js --open --progress --profile --watch --content-base src/",
     "server:dev:hmr": "npm run server:dev -- --inline --hot",
     "server:prod": "http-server demo-dist -c-1 --cors",
-    "webdriver:update": "npm run webdriver-manager update",
-    "webdriver:start": "npm run webdriver-manager start",
-    "lint": "npm run tslint \"src/**/*.ts\"",
-    "pree2e": "npm run webdriver:update -- --standalone",
-    "pretest": "npm run lint",
-    "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
     "start": "npm run server:dev",
     "start:hmr": "npm run server:dev:hmr",
-    "build:package": "node_modules/.bin/ngc -p tsconfig-aot.json",
-    "gh-pages": "npm run build:aot && gh-pages -d demo-dist"
+    "tslint": "tslint",
+    "typedoc": "typedoc",
+    "watch": "npm run watch:dev",
+    "watch:dev": "npm run build:dev -- --watch",
+    "watch:dev:hmr": "npm run watch:dev -- --hot",
+    "watch:prod": "npm run build:prod -- --watch",
+    "webdriver-manager": "webdriver-manager",
+    "webdriver:start": "npm run webdriver-manager start",
+    "webdriver:update": "npm run webdriver-manager update",
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/akveo/ng2-smart-table.git"
-  },
-  "bugs": {
-    "url": "https://github.com/akveo/ng2-smart-table/issues"
-  },
-  "engines": {
-    "node": ">= 5.4.1 < 7"
-  }
+  "typings": "./ng2-smart-table.d.ts",
+  "version": "0.5.3-0",
+  "warnings": [
+    {
+      "code": "ENOTSUP",
+      "required": {
+        "node": ">= 5.4.1 < 7"
+      },
+      "pkgid": "ng2-smart-table@0.5.3-0"
+    }
+  ]
 }
