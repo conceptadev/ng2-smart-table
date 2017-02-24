@@ -48,7 +48,7 @@ export class LocalDataSource extends DataSource {
   }
 
   remove(element: any): Promise<any> {
-    this.data = this.data.filter(el => el !== element);
+    this.data = this.data.filter(el => el.id != element.id);
 
     return super.remove(element);
   }
@@ -63,7 +63,7 @@ export class LocalDataSource extends DataSource {
   }
 
   find(element: any): Promise<any> {
-    let found = this.data.find(el => el === element);
+    let found = this.data.find(el => el.id == element.id);
     if (found) {
       return Promise.resolve(found);
     }

@@ -32,7 +32,7 @@ export class DataSet {
   }
 
   findRowByData(data): Row {
-    return this.rows.find((row: Row) => row.getData() === data);
+    return this.rows.find((row: Row) => row.getData().id == data.id);
   }
 
   deselectAll(): void {
