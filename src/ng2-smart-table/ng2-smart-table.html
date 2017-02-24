@@ -36,7 +36,7 @@
             </th>
         </tr>
 
-        <tr class="table__header__row--neutral" *ngIf="grid.createFormShown">
+        <tr class="table__header__row--success" *ngIf="grid.createFormShown">
             <td *ngIf="grid.isMultiSelectVisible()"></td>
             <td *ngFor="let cell of grid.getNewRow().getCells()">
                 <ng2-smart-table-cell
@@ -46,7 +46,7 @@
                     (edited)="onCreate(grid.getNewRow(), $event)">
                 </ng2-smart-table-cell>
             </td>
-            <td>
+            <td class="table__actions">
                 <a href="#"
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
@@ -59,7 +59,9 @@
         </tr>
     </thead>
     <tbody class="table__body">
-        <tr *ngFor="let row of grid.getRows()" (click)="onUserSelectRow(row)" [ngClass]="{ selected: row.isSelected }">
+        <tr *ngFor="let row of grid.getRows()"
+            (click)="onUserSelectRow(row)"
+            [ngClass]="{ 'selected': row.isSelected, 'table__body__row--success': row.isInEditing }">
             <td *ngIf="grid.isMultiSelectVisible()"
                 (click)="multipleSelectRow(row)">
                 <input type="checkbox" [ngModel]="row.isSelected">
