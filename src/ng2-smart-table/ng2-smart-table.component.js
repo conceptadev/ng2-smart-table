@@ -137,6 +137,8 @@ var Ng2SmartTableComponent = (function () {
     };
     Ng2SmartTableComponent.prototype.onEdit = function (row, event) {
         event.stopPropagation();
+        this.selectedRow.isInEditing = false;
+        this.selectedRow = row;
         if (this.grid.getSetting('selectMode') === 'multi') {
             this.onMultipleSelectRow(row);
         }
@@ -257,8 +259,10 @@ __decorate([
 Ng2SmartTableComponent = __decorate([
     core_1.Component({
         selector: 'ng2-smart-table',
-        styleUrls: ['ng2-smart-table.scss'],
         templateUrl: 'ng2-smart-table.html',
+        host: {
+            '(document:click)': 'onCancelEdit(selectedRow, $event)',
+        }
     })
 ], Ng2SmartTableComponent);
 exports.Ng2SmartTableComponent = Ng2SmartTableComponent;

@@ -69,8 +69,8 @@ __decorate([
 TitleComponent = __decorate([
     core_1.Component({
         selector: 'ng2-smart-table-title',
-        styleUrls: ['title.scss'],
-        template: "\n    <a href=\"#\"\n      *ngIf=\"column.isSortable\"\n      (click)=\"_sort($event, column)\" \n      class=\"ng2-smart-sort-link sort\"\n      [ngClass]=\"currentDirection\">\n      {{ column.title }}\n    </a>\n    <span class=\"ng2-smart-sort\" *ngIf=\"!column.isSortable\">{{ column.title }}</span>\n  "
+        // styleUrls: ['title.scss'],
+        template: "\n    <a href=\"#\"\n      *ngIf=\"column.isSortable\"\n      (click)=\"_sort($event, column)\"\n      class=\"ng2-smart-sort-link sort\"\n      [ngClass]=\"currentDirection\">\n      {{ column.title }}\n    </a>\n    <span class=\"ng2-smart-sort\" *ngIf=\"!column.isSortable\">{{ column.title }}</span>\n  "
     })
 ], TitleComponent);
 exports.TitleComponent = TitleComponent;

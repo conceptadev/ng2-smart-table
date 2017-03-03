@@ -46,7 +46,7 @@ __decorate([
 CellComponent = __decorate([
     core_1.Component({
         selector: 'ng2-smart-table-cell',
-        template: "\n    <table-cell-view-mode *ngIf=\"!isInEditing\" [cell]=\"cell\"></table-cell-view-mode>\n    <table-cell-edit-mode *ngIf=\"isInEditing\" [cell]=\"cell\"\n                          [inputClass]=\"inputClass\"\n                          (edited)=\"onEdited($event)\">\n    </table-cell-edit-mode>\n  ",
+        template: "\n        <table-cell-view-mode *ngIf=\"!isInEditing\" [cell]=\"cell\"></table-cell-view-mode>\n        <table-cell-edit-mode *ngIf=\"isInEditing\" [cell]=\"cell\"\n            [inputClass]=\"inputClass\"\n            (edited)=\"onEdited($event)\">\n        </table-cell-edit-mode>\n        "
     })
 ], CellComponent);
 exports.CellComponent = CellComponent;

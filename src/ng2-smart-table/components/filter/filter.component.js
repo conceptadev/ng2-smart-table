@@ -71,8 +71,8 @@ __decorate([
 FilterComponent = __decorate([
     core_1.Component({
         selector: 'ng2-smart-table-filter',
-        styleUrls: ['filter.scss'],
-        template: "\n    <div class=\"ng2-smart-filter\" *ngIf=\"column.isFilterable\">\n      <input \n        [(ngModel)]=\"query\"\n        (keyup)=\"_filter($event)\"\n        [ngClass]=\"inputClass\"\n        class=\"form-control\"\n        type=\"text\" \n        placeholder=\"{{ column.title }}\" />\n    </div>\n  "
+        // styleUrls: ['filter.scss'],
+        template: "\n    <div class=\"ng2-smart-filter\" *ngIf=\"column.isFilterable\">\n      <input\n        [(ngModel)]=\"query\"\n        (keyup)=\"_filter($event)\"\n        [ngClass]=\"inputClass\"\n        class=\"form-control\"\n        type=\"text\"\n        placeholder=\"{{ column.title }}\" />\n    </div>\n  "
     })
 ], FilterComponent);
 exports.FilterComponent = FilterComponent;

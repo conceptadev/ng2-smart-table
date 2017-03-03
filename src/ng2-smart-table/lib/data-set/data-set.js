@@ -24,7 +24,7 @@ var DataSet = (function () {
         return this.rows;
     };
     DataSet.prototype.findRowByData = function (data) {
-        return this.rows.find(function (row) { return row.getData() === data; });
+        return this.rows.find(function (row) { return row.getData().id == data.id; });
     };
     DataSet.prototype.deselectAll = function () {
         this.rows.forEach(function (row) {

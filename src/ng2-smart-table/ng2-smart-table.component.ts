@@ -14,7 +14,7 @@ import { LocalDataSource } from './lib/data-source/local/local.data-source';
     selector: 'ng2-smart-table',
     templateUrl: 'ng2-smart-table.html',
     host: {
-        '(document:click)': 'onCancelEdit(selectedRow, $event)',
+        '(document:click)': '(selectedRow) ? onCancelEdit(selectedRow, $event) : null',
     }
 })
 export class Ng2SmartTableComponent implements OnChanges {
@@ -79,7 +79,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     };
 
     isAllSelected: boolean = false;
-    selectedRow: Object = {};
+    public selectedRow = { isInEditing: true };
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (this.grid) {
@@ -155,9 +155,8 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     onEdit(row: Row, event): boolean {
         event.stopPropagation();
-		
-		this.selectedRow.isInEditing = false;
 
+        this.selectedRow.isInEditing = false;
         this.selectedRow = row;
 
         if (this.grid.getSetting('selectMode') === 'multi') {

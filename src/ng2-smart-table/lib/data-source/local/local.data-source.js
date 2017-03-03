@@ -44,7 +44,7 @@ var LocalDataSource = (function (_super) {
         return _super.prototype.add.call(this, element);
     };
     LocalDataSource.prototype.remove = function (element) {
-        this.data = this.data.filter(function (el) { return el !== element; });
+        this.data = this.data.filter(function (el) { return el.id != element.id; });
         return _super.prototype.remove.call(this, element);
     };
     LocalDataSource.prototype.update = function (element, values) {
@@ -57,7 +57,7 @@ var LocalDataSource = (function (_super) {
         });
     };
     LocalDataSource.prototype.find = function (element) {
-        var found = this.data.find(function (el) { return el === element; });
+        var found = this.data.find(function (el) { return el.id == element.id; });
         if (found) {
             return Promise.resolve(found);
         }
