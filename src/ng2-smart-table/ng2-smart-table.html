@@ -1,3 +1,12 @@
+<header class="panel flex between">
+    <h2>{{ grid.getSetting('header.headerTitle') }}</h2>
+    <button class="button button--clean" type="button"
+        *ngIf="grid.getSetting('header.actions.add')"
+        (click)="onAdd($event)">
+        <i class="icon-add-green"></i>
+    </button>
+</header>
+
 <table class="table" [id]="grid.getSetting('attr.id')" [ngClass]="grid.getSetting('attr.class')">
     <thead class="table__header" *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')">
         <tr *ngIf="!grid.getSetting('hideHeader')">
@@ -11,7 +20,7 @@
                     (sort)="sort($event)">
                 </ng2-smart-table-title>
             </th>
-            <th *ngIf="grid.showActionColumn('right')">
+            <th *ngIf="grid.showActionColumn('right')" [ngClass]="grid.getSetting('actions.class')">
                 {{ grid.getSetting('actions.columnTitle') }}
             </th>
         </tr>
@@ -29,7 +38,6 @@
             <th>
                 <a *ngIf="grid.getSetting('actions.add')"
                     href="#"
-                    class="js-add-item"
                     [innerHTML]="grid.getSetting('add.addButtonContent')"
                     (click)="onAdd($event)">
                 </a>
