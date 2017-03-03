@@ -68,7 +68,7 @@
     </thead>
     <tbody class="table__body">
         <tr *ngFor="let row of grid.getRows()"
-            (click)="(grid.getSetting('actions.edit')) ? onEdit(row, $event) : null"
+            (click)="(grid.getSetting('actions.edit')) ? onEdit(row, $event) : onUserSelectRow(row)"
             [ngClass]="{ 'selected': row.isSelected, 'table__body__row--success': row.isInEditing }">
             <td *ngIf="grid.isMultiSelectVisible()"
                 (click)="multipleSelectRow(row)">
