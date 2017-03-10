@@ -68,7 +68,7 @@
     </thead>
     <tbody class="table__body">
         <tr *ngFor="let row of grid.getRows()"
-            (click)="(grid.getSetting('actions.edit')) ? onEdit(row, $event) : onUserSelectRow(row)"
+            (click)="onUserSelectRow(row)"
             [ngClass]="{ 'selected': row.isSelected, 'table__body__row--success': row.isInEditing }">
             <td *ngIf="grid.isMultiSelectVisible()"
                 (click)="multipleSelectRow(row)">
@@ -118,3 +118,22 @@
     [perPage]="grid.getSetting('pager.perPage')"
     (changePage)="changePage($event)">
 </ng2-smart-table-pager>
+
+<!-- Modal confirmation message -->
+<div class="modal" *ngIf="showConfirmCancelModal">
+    <div class="modal__box">
+        <!-- Title -->
+        <h4 class="modal__title">Are you sure you to cancel your item edition?</h4>
+        <!-- Content -->
+        <div class="modal__content flex around">
+            <button class="button" type="button"
+                (click)="onCancelEdit(null, $event)">
+                Yes
+            </button>
+            <button class="button" type="button"
+                (click)="showConfirmCancelModal = false; ; $event.stopPropagation(); false">
+                No
+            </button>
+        </div>
+    </div>
+</div>
