@@ -1,5 +1,5 @@
 <header class="panel flex between" [ngClass]="grid.getSetting('panel.class')">
-    <h2>{{ grid.getSetting('panel.title') }}</h2>
+    <h2 [ngClass]="grid.getSetting('panel.titleClass')">{{ grid.getSetting('panel.title') }}</h2>
     <button class="button button--clean" type="button"
         *ngIf="grid.getSetting('panel.actions.add')"
         (click)="onAdd($event)">
@@ -8,7 +8,9 @@
 </header>
 
 <table class="table" [id]="grid.getSetting('attr.id')" [ngClass]="grid.getSetting('attr.class')">
-    <thead class="table__header" *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')">
+    <thead class="table__header"
+        *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
+        [ngClass]="grid.getSetting('classHeader')">
         <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
             <th *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
                 <input type="checkbox" [ngModel]="isAllSelected">
