@@ -150,6 +150,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     private _onSelectRow(data: any) {
         this.rowSelect.emit({
             data: data || null,
+            selectedRow: this.selectedRow,
             source: this.source,
         });
     }
@@ -157,8 +158,8 @@ export class Ng2SmartTableComponent implements OnChanges {
     onEdit(row: Row, event): boolean {
         event.stopPropagation();
 
-        this.selectedRow.isInEditing = false;
         this.selectedRow = row;
+        this.selectedRow.isInEditing = true;
 
         if (this.grid.getSetting('selectMode') === 'multi') {
             this.onMultipleSelectRow(row);
