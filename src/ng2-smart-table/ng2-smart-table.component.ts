@@ -14,7 +14,7 @@ import { LocalDataSource } from './lib/data-source/local/local.data-source';
     selector: 'ng2-smart-table',
     templateUrl: 'ng2-smart-table.html',
     host: {
-        '(document:click)': '(selectedRow.isInEditing) ? showConfirmCancelModal = true : null',
+        '(document:click)': '(selectedRow.isInEditing) && !disableConfirmModal ? showConfirmCancelModal = true : null',
     }
 })
 export class Ng2SmartTableComponent implements OnChanges {
@@ -71,6 +71,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             class: '',
         },
         noDataMessage: 'No data found',
+        disableConfirmModal: false,
         columns: {},
         pager: {
             display: true,
@@ -81,6 +82,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     public isAllSelected: boolean = false;
     public selectedRow = { isInEditing: false };
     public showConfirmCancelModal: boolean = false;
+    public disableConfirmModal: boolean = false;
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (this.grid) {
@@ -175,6 +177,11 @@ export class Ng2SmartTableComponent implements OnChanges {
         } else {
             this.grid.edit(row);
         }
+
+         if (this.disableConfirmModal) {
+            row.isInEditing = false;
+            this.selectedRow.isInEditing = false;
+        } 
         return false;
     }
 
@@ -221,6 +228,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.source = this.prepareSource();
         this.grid = new Grid(this.source, this.prepareSettings());
         this.grid.onSelectRow().subscribe((row) => this.onSelectRow(row));
+        this.disableConfirmModal = this.grid.getSetting('disableConfirmModal');
     }
 
     prepareSource(): DataSource {
