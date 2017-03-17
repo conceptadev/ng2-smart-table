@@ -115,6 +115,14 @@
     </tbody>
 </table>
 
+<footer class="flex end" [ngClass]="grid.getSetting('footer.class')" *ngIf="!grid.getSetting('hideFooter')">
+    <button class="button button--clean" type="button"
+        *ngIf="grid.getSetting('footer.actions.add')"
+        (click)="onAdd($event)">
+        <i class="icon-add-green"></i>
+    </button>
+</footer>
+
 <ng2-smart-table-pager *ngIf="grid.getSetting('pager.display')"
     [source]="source"
     [perPage]="grid.getSetting('pager.perPage')"

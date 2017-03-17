@@ -38,6 +38,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         selectMode: 'single', // single|multi
         hideHeader: false,
         hideSubHeader: true,
+        hideFooter: true,
         actions: {
             columnTitle: 'Actions',
             add: true,
@@ -181,7 +182,7 @@ export class Ng2SmartTableComponent implements OnChanges {
          if (this.disableConfirmModal) {
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
-        } 
+        }
         return false;
     }
 
