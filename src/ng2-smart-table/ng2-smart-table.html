@@ -70,7 +70,7 @@
     </thead>
     <tbody class="table__body">
         <tr *ngFor="let row of grid.getRows()"
-            (click)="onUserSelectRow(row)"
+            (click)="(grid.getSetting('actions.editInline')) ? onEdit(row, $event) : onUserSelectRow(row)"
             [ngClass]="{ 'selected': row.isSelected, 'table__body__row--success': row.isInEditing }">
             <td *ngIf="grid.isMultiSelectVisible()"
                 (click)="multipleSelectRow(row)">

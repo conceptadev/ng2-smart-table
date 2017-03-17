@@ -41,6 +41,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         hideFooter: true,
         actions: {
             columnTitle: 'Actions',
+            editInline: false,
             add: true,
             edit: true,
             delete: true,
@@ -84,6 +85,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     public selectedRow = { isInEditing: false };
     public showConfirmCancelModal: boolean = false;
     public disableConfirmModal: boolean = false;
+    public editInline: boolean = false;
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (this.grid) {
@@ -179,7 +181,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             this.grid.edit(row);
         }
 
-         if (this.disableConfirmModal) {
+          if (this.disableConfirmModal && !this.editInline) {
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
         }
@@ -230,6 +232,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.grid = new Grid(this.source, this.prepareSettings());
         this.grid.onSelectRow().subscribe((row) => this.onSelectRow(row));
         this.disableConfirmModal = this.grid.getSetting('disableConfirmModal');
+        this.editInline = this.grid.getSetting('actions').editInline;
     }
 
     prepareSource(): DataSource {
