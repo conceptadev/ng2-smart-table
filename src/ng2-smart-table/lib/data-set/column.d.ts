@@ -16,15 +16,14 @@ export declare class Column {
         config: any;
         component: any;
     };
+    renderComponent: any;
     compareFunction: Function;
     valuePrepareFunction: Function;
     filterFunction: Function;
-    cellRenderFunction: Function;
     constructor(id: string, settings: any, dataSet: DataSet);
     getCompareFunction(): Function;
     getValuePrepareFunction(): Function;
     getFilterFunction(): Function;
-    getCellRenderFunction(): Function;
     getConfig(): any;
     protected process(): void;
     prepareType(): string;

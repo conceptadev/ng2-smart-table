@@ -13,32 +13,16 @@ var cell_1 = require("../../../lib/data-set/cell");
 var ViewCellComponent = (function () {
     function ViewCellComponent() {
     }
-    ViewCellComponent.prototype.ngOnChanges = function (changes) {
-        var _this = this;
-        setTimeout(function () { return _this.renderCustomValue(); });
-    };
-    ViewCellComponent.prototype.ngAfterViewInit = function () {
-        this.renderCustomValue();
-    };
-    ViewCellComponent.prototype.renderCustomValue = function () {
-        var cellRenderFunc = this.cell.getColumn().getCellRenderFunction();
-        if (cellRenderFunc && this.cellRef)
-            cellRenderFunc.call(null, this.cell, this.cellRef.nativeElement);
-    };
     return ViewCellComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", cell_1.Cell)
 ], ViewCellComponent.prototype, "cell", void 0);
-__decorate([
-    core_1.ViewChild('cellContainer'),
-    __metadata("design:type", core_1.ElementRef)
-], ViewCellComponent.prototype, "cellRef", void 0);
 ViewCellComponent = __decorate([
     core_1.Component({
         selector: 'table-cell-view-mode',
-        template: "\n    <div [ngSwitch]=\"cell.getColumn().type\">\n        <div *ngSwitchCase=\"'html'\" #cellContainer [innerHTML]=\"cell.getValue()\"></div>\n\n        <div *ngSwitchDefault #cellContainer>{{ cell.getValue() }}</div>\n    </div>\n    "
+        template: "\n    <div [ngSwitch]=\"cell.getColumn().type\">\n        <custom-view-component *ngSwitchCase=\"'custom'\" [cell]=\"cell\"></custom-view-component>\n        <div *ngSwitchCase=\"'html'\" [innerHTML]=\"cell.getValue()\"></div>\n        <div *ngSwitchDefault>{{ cell.getValue() }}</div>\n    </div>\n    "
     })
 ], ViewCellComponent);
 exports.ViewCellComponent = ViewCellComponent;

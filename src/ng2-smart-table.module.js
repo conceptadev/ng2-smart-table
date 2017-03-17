@@ -11,7 +11,7 @@ var forms_1 = require("@angular/forms");
 var ng2_completer_1 = require("ng2-completer");
 var ng2_smart_table_directives_1 = require("./ng2-smart-table.directives");
 var cell_component_1 = require("./ng2-smart-table/components/cell/cell.component");
-var view_cell_component_1 = require("./ng2-smart-table/components/cell/cell-view-mode/view-cell.component");
+var cell_view_mode_1 = require("./ng2-smart-table/components/cell/cell-view-mode");
 var cell_edit_mode_1 = require("./ng2-smart-table/components/cell/cell-edit-mode");
 var cell_editors_1 = require("./ng2-smart-table/components/cell/cell-editors");
 var filter_component_1 = require("./ng2-smart-table/components/filter/filter.component");
@@ -31,9 +31,10 @@ Ng2SmartTableModule = __decorate([
         ],
         declarations: [
             cell_component_1.CellComponent,
-            view_cell_component_1.ViewCellComponent,
+            cell_view_mode_1.ViewCellComponent,
             cell_edit_mode_1.DefaultEditComponent,
             cell_edit_mode_1.CustomEditComponent,
+            cell_view_mode_1.CustomViewComponent,
             cell_edit_mode_1.EditCellComponent,
             cell_editors_1.CompleterEditorComponent,
             cell_editors_1.InputEditorComponent,

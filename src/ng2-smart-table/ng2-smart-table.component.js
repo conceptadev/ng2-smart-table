@@ -28,7 +28,7 @@ var Ng2SmartTableComponent = (function () {
             mode: 'inline',
             selectMode: 'single',
             hideHeader: false,
-            hideSubHeader: false,
+            hideSubHeader: true,
             actions: {
                 columnTitle: 'Actions',
                 add: true,
@@ -62,6 +62,7 @@ var Ng2SmartTableComponent = (function () {
                 class: '',
             },
             noDataMessage: 'No data found',
+            disableConfirmModal: false,
             columns: {},
             pager: {
                 display: true,
@@ -69,6 +70,9 @@ var Ng2SmartTableComponent = (function () {
             }
         };
         this.isAllSelected = false;
+        this.selectedRow = { isInEditing: false };
+        this.showConfirmCancelModal = false;
+        this.disableConfirmModal = false;
     }
     Ng2SmartTableComponent.prototype.ngOnChanges = function (changes) {
         if (this.grid) {
@@ -132,13 +136,14 @@ var Ng2SmartTableComponent = (function () {
     Ng2SmartTableComponent.prototype._onSelectRow = function (data) {
         this.rowSelect.emit({
             data: data || null,
+            selectedRow: this.selectedRow,
             source: this.source,
         });
     };
     Ng2SmartTableComponent.prototype.onEdit = function (row, event) {
         event.stopPropagation();
-        this.selectedRow.isInEditing = false;
         this.selectedRow = row;
+        this.selectedRow.isInEditing = true;
         if (this.grid.getSetting('selectMode') === 'multi') {
             this.onMultipleSelectRow(row);
         }
@@ -153,6 +158,10 @@ var Ng2SmartTableComponent = (function () {
         }
         else {
             this.grid.edit(row);
+        }
+        if (this.disableConfirmModal) {
+            row.isInEditing = false;
+            this.selectedRow.isInEditing = false;
         }
         return false;
     };
@@ -181,7 +190,10 @@ var Ng2SmartTableComponent = (function () {
     };
     Ng2SmartTableComponent.prototype.onCancelEdit = function (row, event) {
         event.stopPropagation();
+        row = row || this.selectedRow;
         row.isInEditing = false;
+        this.selectedRow.isInEditing = false;
+        this.showConfirmCancelModal = false;
         return false;
     };
     Ng2SmartTableComponent.prototype.initGrid = function () {
@@ -189,6 +201,7 @@ var Ng2SmartTableComponent = (function () {
         this.source = this.prepareSource();
         this.grid = new grid_1.Grid(this.source, this.prepareSettings());
         this.grid.onSelectRow().subscribe(function (row) { return _this.onSelectRow(row); });
+        this.disableConfirmModal = this.grid.getSetting('disableConfirmModal');
     };
     Ng2SmartTableComponent.prototype.prepareSource = function () {
         if (this.source instanceof data_source_1.DataSource) {
@@ -261,7 +274,7 @@ Ng2SmartTableComponent = __decorate([
         selector: 'ng2-smart-table',
         templateUrl: 'ng2-smart-table.html',
         host: {
-            '(document:click)': 'onCancelEdit(selectedRow, $event)',
+            '(document:click)': '(selectedRow.isInEditing) && !disableConfirmModal ? showConfirmCancelModal = true : null',
         }
     })
 ], Ng2SmartTableComponent);

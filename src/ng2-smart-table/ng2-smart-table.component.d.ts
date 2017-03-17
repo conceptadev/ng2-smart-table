@@ -16,7 +16,11 @@ export declare class Ng2SmartTableComponent implements OnChanges {
     grid: Grid;
     defaultSettings: Object;
     isAllSelected: boolean;
-    selectedRow: Row;
+    selectedRow: {
+        isInEditing: boolean;
+    };
+    showConfirmCancelModal: boolean;
+    disableConfirmModal: boolean;
     ngOnChanges(changes: {
         [propertyName: string]: SimpleChange;
     }): void;
@@ -32,7 +36,7 @@ export declare class Ng2SmartTableComponent implements OnChanges {
     onDelete(row: Row, event: any): boolean;
     onCreate(row: Row, event: any): boolean;
     onSave(row: Row, event: any): boolean;
-    onCancelEdit(row: Row, event: any): boolean;
+    onCancelEdit(row: any, event: any): boolean;
     initGrid(): void;
     prepareSource(): DataSource;
     prepareSettings(): Object;

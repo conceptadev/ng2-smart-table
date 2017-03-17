@@ -13,6 +13,7 @@ var Column = (function () {
         this.sortDirection = '';
         this.defaultSortDirection = '';
         this.editor = { type: '', config: {}, component: null };
+        this.renderComponent = null;
         this.process();
     }
     Column.prototype.getCompareFunction = function () {
@@ -24,9 +25,6 @@ var Column = (function () {
     Column.prototype.getFilterFunction = function () {
         return this.filterFunction;
     };
-    Column.prototype.getCellRenderFunction = function () {
-        return this.cellRenderFunction;
-    };
     Column.prototype.getConfig = function () {
         return this.editor.config;
     };
@@ -35,6 +33,7 @@ var Column = (function () {
         this.class = this.settings['class'];
         this.type = this.prepareType();
         this.editor = this.settings['editor'];
+        this.renderComponent = this.settings['renderComponent'];
         this.isFilterable = typeof this.settings['filter'] === 'undefined' ? true : !!this.settings['filter'];
         this.defaultSortDirection = ['asc', 'desc'].indexOf(this.settings['sortDirection']) !== -1 ? this.settings['sortDirection'] : '';
         this.isSortable = typeof this.settings['sort'] === 'undefined' ? true : !!this.settings['sort'];
@@ -43,7 +42,6 @@ var Column = (function () {
         this.compareFunction = this.settings['compareFunction'];
         this.valuePrepareFunction = this.settings['valuePrepareFunction'];
         this.filterFunction = this.settings['filterFunction'];
-        this.cellRenderFunction = this.settings['cellRenderFunction'];
     };
     Column.prototype.prepareType = function () {
         return this.settings['type'] || this.determineType();

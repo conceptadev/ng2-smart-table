@@ -10,4 +10,6 @@ var cell_1 = require("./src/ng2-smart-table/lib/data-set/cell");
 exports.Cell = cell_1.Cell;
 var default_editor_1 = require("./src/ng2-smart-table/components/cell/cell-editors/default-editor");
 exports.DefaultEditor = default_editor_1.DefaultEditor;
+var view_cell_1 = require("./src/ng2-smart-table/components/cell/cell-view-mode");
+exports.ViewCell = view_cell_1.ViewCell;
 //# sourceMappingURL=ng2-smart-table.js.map
