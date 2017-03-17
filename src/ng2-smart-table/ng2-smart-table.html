@@ -27,7 +27,7 @@
             </th>
         </tr>
 
-        <tr *ngIf="!grid.getSetting('hideSubHeader')">
+        <tr class="table__subheader" *ngIf="!grid.getSetting('hideSubHeader')">
             <th *ngIf="grid.isMultiSelectVisible()"></th>
             <th *ngFor="let column of grid.getColumns()">
                 <ng2-smart-table-filter
