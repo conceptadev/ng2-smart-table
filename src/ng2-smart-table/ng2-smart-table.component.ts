@@ -74,6 +74,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         },
         noDataMessage: 'No data found',
         disableConfirmModal: false,
+        disableRowEdit: false,
         columns: {},
         pager: {
             display: true,
@@ -85,6 +86,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     public selectedRow = { isInEditing: false };
     public showConfirmCancelModal: boolean = false;
     public disableConfirmModal: boolean = false;
+    public disableRowEdit: boolean = false;
     public editInline: boolean = false;
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
@@ -181,7 +183,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             this.grid.edit(row);
         }
 
-          if (this.disableConfirmModal && !this.editInline) {
+          if (this.disableRowEdit) {
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
         }
@@ -232,6 +234,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.grid = new Grid(this.source, this.prepareSettings());
         this.grid.onSelectRow().subscribe((row) => this.onSelectRow(row));
         this.disableConfirmModal = this.grid.getSetting('disableConfirmModal');
+        this.disableRowEdit = this.grid.getSetting('disableRowEdit');
         this.editInline = this.grid.getSetting('actions').editInline;
     }
 
