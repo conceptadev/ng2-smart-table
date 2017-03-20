@@ -111,6 +111,10 @@ export class Ng2SmartTableComponent implements OnChanges {
             });
         } else {
             this.grid.createFormShown = true;
+
+            this.create.emit({
+                newRow: this.grid.getNewRow()
+            });
         }
         return false;
     }
