@@ -71,12 +71,13 @@
     <tbody class="table__body">
         <tr *ngFor="let row of grid.getRows()"
             (click)="(grid.getSetting('actions.editInline')) ? onEdit(row, $event) : onUserSelectRow(row)"
-            [ngClass]="{ 'selected': row.isSelected, 'table__body__row--success': row.isInEditing }">
+			[ngClass]="{ 'selected': !grid.isMultiSelectVisible() && row.isSelected, 'table__body__row--success': row.isInEditing }">
             <td *ngIf="grid.isMultiSelectVisible()"
                 (click)="multipleSelectRow(row)">
                 <input type="checkbox" [ngModel]="row.isSelected">
             </td>
-            <td *ngFor="let cell of row.getCells()">
+            <td *ngFor="let cell of row.getCells()"
+                [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
                 <ng2-smart-table-cell
                     [cell]="cell"
                     [mode]="grid.getSetting('mode')"
@@ -85,7 +86,7 @@
                     (edited)="onSave(row, $event)">
                 </ng2-smart-table-cell>
             </td>
-            <td class="table__actions" *ngIf="!row.isInEditing && grid.showActionColumn('right')">
+            <td class="table__actions" *ngIf="!row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
                 <button class="button button--clean" type="button" *ngIf="grid.getSetting('actions.edit')"
                     [innerHTML]="grid.getSetting('edit.editButtonContent')"
                     (click)="onEdit(row, $event)">
@@ -95,7 +96,7 @@
                     (click)="onDelete(row, $event)">
                 </button>
             </td>
-            <td class="table__actions" *ngIf="row.isInEditing && grid.showActionColumn('right')">
+            <td class="table__actions" *ngIf="row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
                 <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('edit.saveButtonContent')"
                     (click)="onSave(row, $event)">

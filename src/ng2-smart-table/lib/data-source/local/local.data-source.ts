@@ -3,9 +3,11 @@ import { LocalFilter } from './local.filter';
 import { LocalPager } from './local.pager';
 import { DataSource } from '../data-source';
 import { deepExtend } from '../../helpers';
+import { Grid } from '../../../lib/grid';
 
 export class LocalDataSource extends DataSource {
 
+  public grid: Grid;
   protected data: Array<any> = [];
   protected filteredAndSorted: Array<any> = [];
   protected sortConf: Array<any> = [];

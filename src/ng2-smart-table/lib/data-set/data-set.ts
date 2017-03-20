@@ -4,10 +4,9 @@ import { Column } from './column';
 export class DataSet {
 
   public newRow: Row;
-
+  public rows: Array<Row> = [];
   protected data: Array<any> = [];
   protected columns: Array<Column> = [];
-  protected rows: Array<Row> = [];
   protected selectedRow: Row;
   protected willSelect: string = 'first';
 

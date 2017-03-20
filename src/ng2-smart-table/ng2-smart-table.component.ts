@@ -32,7 +32,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     @Output() public editConfirm: EventEmitter<any> = new EventEmitter<any>();
     @Output() public createConfirm: EventEmitter<any> = new EventEmitter<any>();
 
-    grid: Grid;
+    @Output() public grid: Grid;
     defaultSettings: Object = {
         mode: 'inline', // inline|external|click-to-edit
         selectMode: 'single', // single|multi
@@ -96,6 +96,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             }
             if (changes['source']) {
                 this.grid.setSource(this.source);
+                this.source.grid = this.grid;
             }
         } else {
             this.initGrid();
@@ -236,6 +237,8 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.disableConfirmModal = this.grid.getSetting('disableConfirmModal');
         this.disableRowEdit = this.grid.getSetting('disableRowEdit');
         this.editInline = this.grid.getSetting('actions').editInline;
+
+        this.source.grid = this.grid;
     }
 
     prepareSource(): DataSource {
