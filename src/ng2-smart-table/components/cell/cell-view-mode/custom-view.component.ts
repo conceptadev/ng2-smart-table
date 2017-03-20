@@ -31,6 +31,7 @@ export class CustomViewComponent implements OnInit {
 
       // set @Inputs and @Outputs of custom component
       this.customComponent.instance.value = this.cell.getValue();
+      this.customComponent.instance.cell = this.cell;
     }
   }
 
