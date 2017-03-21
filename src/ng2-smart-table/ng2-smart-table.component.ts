@@ -58,6 +58,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             confirmSave: false
         },
         add: {
+            position: 'top',
             inputClass: '',
             addButtonContent: 'Add New',
             createButtonContent: 'Create',

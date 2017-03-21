@@ -46,7 +46,7 @@
             </th>
         </tr>
 
-        <tr class="table__header__row--success" *ngIf="grid.createFormShown">
+        <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'top'">
             <td *ngIf="grid.isMultiSelectVisible()"></td>
             <td *ngFor="let cell of grid.getNewRow().getCells()">
                 <ng2-smart-table-cell
@@ -116,6 +116,27 @@
     </tbody>
     <tfoot class="table__footer" *ngIf="!grid.getSetting('hideFooter')"
         [ngClass]="grid.getSetting('footer.class')">
+        <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'bottom'">
+            <td *ngIf="grid.isMultiSelectVisible()"></td>
+            <td *ngFor="let cell of grid.getNewRow().getCells()">
+                <ng2-smart-table-cell
+                    [cell]="cell"
+                    [inputClass]="grid.getSetting('add.inputClass')"
+                    [isInEditing]="grid.getNewRow().isInEditing"
+                    (edited)="onCreate(grid.getNewRow(), $event)">
+                </ng2-smart-table-cell>
+            </td>
+            <td class="table__actions">
+                <a href="#"
+                    [innerHTML]="grid.getSetting('add.createButtonContent')"
+                    (click)="onCreate(grid.getNewRow(), $event)">
+                </a>
+                <a href="#"
+                    [innerHTML]="grid.getSetting('add.cancelButtonContent')"
+                    (click)="grid.createFormShown = false;">
+                </a>
+            </td>
+        </tr>
         <tr>
             <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
                 <button class="button button--clean" type="button"
