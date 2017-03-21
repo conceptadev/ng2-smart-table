@@ -114,15 +114,19 @@
             </td>
         </tr>
     </tbody>
+    <tfoot class="table__footer" *ngIf="!grid.getSetting('hideFooter')"
+        [ngClass]="grid.getSetting('footer.class')">
+        <tr>
+            <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
+                <button class="button button--clean" type="button"
+                    *ngIf="grid.getSetting('footer.actions.add')"
+                    (click)="onAdd($event)">
+                    <i class="icon-add-green"></i>
+                </button>
+            </td>
+        </tr>
+    </tfoot>
 </table>
-
-<footer class="flex end" [ngClass]="grid.getSetting('footer.class')" *ngIf="!grid.getSetting('hideFooter')">
-    <button class="button button--clean" type="button"
-        *ngIf="grid.getSetting('footer.actions.add')"
-        (click)="onAdd($event)">
-        <i class="icon-add-green"></i>
-    </button>
-</footer>
 
 <ng2-smart-table-pager *ngIf="grid.getSetting('pager.display')"
     [source]="source"
