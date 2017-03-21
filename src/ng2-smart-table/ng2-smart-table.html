@@ -1,6 +1,6 @@
 <header class="panel flex between" [ngClass]="grid.getSetting('panel.class')">
     <h2 [ngClass]="grid.getSetting('panel.titleClass')">{{ grid.getSetting('panel.title') }}</h2>
-    <button class="button button--clean" type="button"
+    <button class="button button--clean" type="button" [id]="grid.getSetting('panel.actions.addId')"
         *ngIf="grid.getSetting('panel.actions.add')"
         (click)="onAdd($event)">
         <i class="icon-add-green"></i>
