@@ -189,7 +189,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             this.grid.edit(row);
         }
 
-          if (this.disableRowEdit) {
+        if (this.disableRowEdit && !this.editInline) {
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
         }
