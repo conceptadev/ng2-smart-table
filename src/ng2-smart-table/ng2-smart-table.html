@@ -157,19 +157,24 @@
 
 <!-- Modal confirmation message -->
 <div class="modal" *ngIf="showConfirmCancelModal">
-    <div class="modal__box">
-        <!-- Title -->
-        <h4 class="modal__title">Are you sure you want to leave the edition mode?</h4>
+    <div class="modal__box modal__box--small">
         <!-- Content -->
-        <div class="modal__content flex around">
-            <button class="button" type="button"
-                (click)="onCancelEdit(null, $event)">
-                Yes
-            </button>
-            <button class="button" type="button"
-                (click)="showConfirmCancelModal = false; $event.stopPropagation(); false">
-                No
-            </button>
+        <div class="modal__content modal__content--warning flex column between">
+            <h4 class="modal__title-warning">Attention:</h4>
+            <p>
+                All modifications will be lost.<br>
+                Are you sure you want to cancel?
+            </p>
+            <aside>
+                <button class="button button--small button--active" type="button"
+                    (click)="onCancelEdit(null, $event)">
+                    Yes
+                </button>
+                <button class="button button--small button--active" type="button"
+                    (click)="showConfirmCancelModal = false; $event.stopPropagation(); false">
+                    No
+                </button>
+            </aside>
         </div>
     </div>
 </div>
