@@ -170,7 +170,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     onEdit(row: Row, event): boolean {
         event.stopPropagation();
-
+        this.selectedRow.isInEditing = false;
         this.selectedRow = row;
         this.selectedRow.isInEditing = true;
 
