@@ -159,7 +159,7 @@
 <div class="modal" *ngIf="showConfirmCancelModal">
     <div class="modal__box">
         <!-- Title -->
-        <h4 class="modal__title">Are you sure you to cancel your item edition?</h4>
+        <h4 class="modal__title">Are you sure you want to leave the edition mode?</h4>
         <!-- Content -->
         <div class="modal__content flex around">
             <button class="button" type="button"
@@ -167,7 +167,7 @@
                 Yes
             </button>
             <button class="button" type="button"
-                (click)="showConfirmCancelModal = false; ; $event.stopPropagation(); false">
+                (click)="showConfirmCancelModal = false; $event.stopPropagation(); false">
                 No
             </button>
         </div>

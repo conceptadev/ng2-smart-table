@@ -14,11 +14,10 @@ import { LocalDataSource } from './lib/data-source/local/local.data-source';
     selector: 'ng2-smart-table',
     templateUrl: 'ng2-smart-table.html',
     host: {
-        '(document:click)': '(selectedRow.isInEditing) && !disableConfirmModal ? showConfirmCancelModal = true : null',
+        '(document:click)': '(selectedRow.isInEditing || grid.createFormShown) && !disableConfirmModal ? openConfirmCancelModal($event) : null',
     }
 })
 export class Ng2SmartTableComponent implements OnChanges {
-
     @Input() source: any;
     @Input() settings: Object = {};
 
@@ -106,6 +105,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     onAdd(event): boolean {
         event.stopPropagation();
+
         if (this.grid.getSetting('mode') === 'external') {
             this.create.emit({
                 source: this.source
@@ -156,6 +156,13 @@ export class Ng2SmartTableComponent implements OnChanges {
         this._onSelectRow(row.getData());
     }
 
+    openConfirmCancelModal(event): void {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.showConfirmCancelModal = true;
+    }
+
     onMultipleSelectRow(row: Row): void {
         this._onSelectRow(row.getData());
     }
@@ -189,7 +196,7 @@ export class Ng2SmartTableComponent implements OnChanges {
             this.grid.edit(row);
         }
 
-          if (this.disableRowEdit) {
+        if (this.disableRowEdit) {
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
         }
@@ -230,6 +237,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         row = row || this.selectedRow;
 
         row.isInEditing = false;
+        this.grid.createFormShown = false;
         this.selectedRow.isInEditing = false;
         this.showConfirmCancelModal = false;
         return false;
