@@ -1,5 +1,6 @@
 import {
-    Component, Input, Output, SimpleChange, EventEmitter,
+    Component,
+    Input, Output, SimpleChange, EventEmitter,
     OnChanges
 } from '@angular/core';
 
@@ -89,6 +90,16 @@ export class Ng2SmartTableComponent implements OnChanges {
     public disableRowEdit: boolean = false;
     public editInline: boolean = false;
 
+    @Output()
+    public onDisableSidebar = new EventEmitter<boolean>();
+    public sidebarDisabled: boolean = false;
+
+    public disableSidebar(disable: boolean): void {
+        console.log(disable);
+        this.onDisableSidebar.emit(true);
+        this.sidebarDisabled = disable;
+    }
+
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (this.grid) {
             if (changes['settings']) {
@@ -160,6 +171,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         event.preventDefault();
         event.stopPropagation();
 
+        this.disableSidebar(true);
         this.showConfirmCancelModal = true;
     }
 
@@ -239,6 +251,8 @@ export class Ng2SmartTableComponent implements OnChanges {
         row.isInEditing = false;
         this.grid.createFormShown = false;
         this.selectedRow.isInEditing = false;
+
+        this.disableSidebar(false);
         this.showConfirmCancelModal = false;
         return false;
     }
