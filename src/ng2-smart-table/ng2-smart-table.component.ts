@@ -90,14 +90,14 @@ export class Ng2SmartTableComponent implements OnChanges {
     public disableRowEdit: boolean = false;
     public editInline: boolean = false;
 
-    @Output()
-    public onDisableSidebar = new EventEmitter<boolean>();
-    public sidebarDisabled: boolean = false;
-
     public disableSidebar(disable: boolean): void {
-        console.log(disable);
-        this.onDisableSidebar.emit(true);
-        this.sidebarDisabled = disable;
+        let sidebar = document.querySelector('.sidebar');
+
+        if(disable) {
+            sidebar.classList.add('disabled');
+        } else {
+            sidebar.classList.remove('disabled');
+        }
     }
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
@@ -116,6 +116,8 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     onAdd(event): boolean {
         event.stopPropagation();
+
+        this.disableSidebar(true);
 
         if (this.grid.getSetting('mode') === 'external') {
             this.create.emit({
@@ -171,7 +173,6 @@ export class Ng2SmartTableComponent implements OnChanges {
         event.preventDefault();
         event.stopPropagation();
 
-        this.disableSidebar(true);
         this.showConfirmCancelModal = true;
     }
 
@@ -192,6 +193,8 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.selectedRow.isInEditing = false;
         this.selectedRow = row;
         this.selectedRow.isInEditing = true;
+
+        this.disableSidebar(true);
 
         if (this.grid.getSetting('selectMode') === 'multi') {
             this.onMultipleSelectRow(row);
