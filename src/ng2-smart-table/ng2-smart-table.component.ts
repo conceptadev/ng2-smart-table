@@ -235,12 +235,16 @@ export class Ng2SmartTableComponent implements OnChanges {
     onCreate(row: Row, event): boolean {
         event.stopPropagation();
 
+        this.disableSidebar(false);
+
         this.grid.create(row, this.createConfirm);
         return false;
     }
 
     onSave(row: Row, event): boolean {
         event.stopPropagation();
+
+        this.disableSidebar(false);
 
         this.grid.save(row, this.editConfirm);
         return false;
