@@ -212,6 +212,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         }
 
         if (this.disableRowEdit && !this.editInline) {
+            this.disableSidebar(false);
             row.isInEditing = false;
             this.selectedRow.isInEditing = false;
         }

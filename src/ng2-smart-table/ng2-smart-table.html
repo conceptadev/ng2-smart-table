@@ -64,7 +64,7 @@
                 </a>
                 <a href="#"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                    (click)="grid.createFormShown = false;">
+                    (click)="grid.createFormShown = false; disableSidebar(false)">
                 </a>
             </td>
         </tr>
