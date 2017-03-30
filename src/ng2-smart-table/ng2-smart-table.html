@@ -12,7 +12,7 @@
         *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
         [ngClass]="grid.getSetting('classHeader')">
         <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
-            <th *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
+            <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
                 <input type="checkbox" [ngModel]="isAllSelected">
                 Add
             </th>
