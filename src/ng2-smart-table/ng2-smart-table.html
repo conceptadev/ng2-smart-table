@@ -58,14 +58,14 @@
                 </ng2-smart-table-cell>
             </td>
             <td class="table__actions">
-                <a href="#"
+                <button class="button button--clean" type="button" 
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
-                </a>
-                <a href="#"
+                </button>
+                <button class="button button--clean" type="button" 
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
                     (click)="grid.createFormShown = false; disableSidebar(false)">
-                </a>
+                </button>
             </td>
         </tr>
     </thead>
@@ -128,14 +128,14 @@
                 </ng2-smart-table-cell>
             </td>
             <td class="table__actions">
-                <a href="#"
+                <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
-                </a>
-                <a href="#"
+                </button>
+                <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
                     (click)="grid.createFormShown = false;">
-                </a>
+                </button>
             </td>
         </tr>
         <tr>
