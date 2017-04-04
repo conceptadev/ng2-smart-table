@@ -117,7 +117,9 @@ export class Ng2SmartTableComponent implements OnChanges {
     onAdd(event): boolean {
         event.stopPropagation();
 
-        this.disableSidebar(true);
+        if(this.disableConfirmModal === false) {
+            this.disableSidebar(true);
+        }
 
         if (this.grid.getSetting('mode') === 'external') {
             this.create.emit({
@@ -194,7 +196,9 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.selectedRow = row;
         this.selectedRow.isInEditing = true;
 
-        this.disableSidebar(true);
+        if(this.disableConfirmModal === false) {
+            this.disableSidebar(true);
+        }
 
         if (this.grid.getSetting('selectMode') === 'multi') {
             this.onMultipleSelectRow(row);
