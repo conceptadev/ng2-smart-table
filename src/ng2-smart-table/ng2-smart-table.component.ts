@@ -36,9 +36,11 @@ export class Ng2SmartTableComponent implements OnChanges {
     defaultSettings: Object = {
         mode: 'inline', // inline|external|click-to-edit
         selectMode: 'single', // single|multi
+        hideGroupHeader: false,
         hideHeader: false,
         hideSubHeader: true,
         hideFooter: true,
+        groups: [],
         actions: {
             columnTitle: 'Actions',
             editInline: false,

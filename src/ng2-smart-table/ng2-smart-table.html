@@ -11,6 +11,10 @@
     <thead class="table__header"
         *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
         [ngClass]="grid.getSetting('classHeader')">
+        <tr class="table__group" *ngIf="!grid.getSetting('hideGroupHeader')">
+            <th *ngFor="let group of grid.getSetting('groups')" [ngClass]="group.class" [attr.colspan]="group.colspan">{{ group.title }}</th>
+        </tr>
+
         <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
             <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
                 <input type="checkbox" [ngModel]="isAllSelected">
@@ -58,11 +62,11 @@
                 </ng2-smart-table-cell>
             </td>
             <td class="table__actions">
-                <button class="button button--clean" type="button" 
+                <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
                 </button>
-                <button class="button button--clean" type="button" 
+                <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
                     (click)="grid.createFormShown = false; disableSidebar(false)">
                 </button>
