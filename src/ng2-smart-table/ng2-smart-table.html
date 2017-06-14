@@ -7,154 +7,152 @@
     </button>
 </header>
 
-<article class="table--scroll">
-    <table class="table" [id]="grid.getSetting('attr.id')" [ngClass]="grid.getSetting('attr.class')">
-        <thead class="table__header"
-            *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
-            [ngClass]="grid.getSetting('classHeader')">
-            <tr class="table__group" *ngIf="!grid.getSetting('hideGroupHeader')">
-                <th *ngFor="let group of grid.getSetting('groups')" [ngClass]="group.class" [attr.colspan]="group.colspan">{{ group.title }}</th>
-            </tr>
+<table class="table" [id]="grid.getSetting('attr.id')" [ngClass]="grid.getSetting('attr.class')">
+    <thead class="table__header"
+        *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
+        [ngClass]="grid.getSetting('classHeader')">
+        <tr class="table__group" *ngIf="!grid.getSetting('hideGroupHeader')">
+            <th *ngFor="let group of grid.getSetting('groups')" [ngClass]="group.class" [attr.colspan]="group.colspan">{{ group.title }}</th>
+        </tr>
 
-            <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
-                <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
-                    <input type="checkbox" [ngModel]="isAllSelected">
-                    Add
-                </th>
-                <th *ngFor="let column of grid.getColumns()" [ngClass]="column.class">
-                    <ng2-smart-table-title
-                        [source]="source"
-                        [column]="column"
-                        (sort)="sort($event)">
-                    </ng2-smart-table-title>
-                </th>
-                <th *ngIf="grid.showActionColumn('right')" [ngClass]="grid.getSetting('actions.class')">
-                    {{ grid.getSetting('actions.columnTitle') }}
-                </th>
-            </tr>
+        <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
+            <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
+                <input type="checkbox" [ngModel]="isAllSelected">
+                Add
+            </th>
+            <th *ngFor="let column of grid.getColumns()" [ngClass]="column.class">
+                <ng2-smart-table-title
+                    [source]="source"
+                    [column]="column"
+                    (sort)="sort($event)">
+                </ng2-smart-table-title>
+            </th>
+            <th *ngIf="grid.showActionColumn('right')" [ngClass]="grid.getSetting('actions.class')">
+                {{ grid.getSetting('actions.columnTitle') }}
+            </th>
+        </tr>
 
-            <tr class="table__subheader" *ngIf="!grid.getSetting('hideSubHeader')">
-                <th *ngIf="grid.isMultiSelectVisible()"></th>
-                <th *ngFor="let column of grid.getColumns()">
-                    <ng2-smart-table-filter
-                        [source]="source"
-                        [column]="column"
-                        [inputClass]="grid.getSetting('filter.inputClass')"
-                        (filter)="filter($event)">
-                    </ng2-smart-table-filter>
-                </th>
-                <th>
-                    <a *ngIf="grid.getSetting('actions.add')"
-                        href="#"
-                        [innerHTML]="grid.getSetting('add.addButtonContent')"
-                        (click)="onAdd($event)">
-                    </a>
-                </th>
-            </tr>
+        <tr class="table__subheader" *ngIf="!grid.getSetting('hideSubHeader')">
+            <th *ngIf="grid.isMultiSelectVisible()"></th>
+            <th *ngFor="let column of grid.getColumns()">
+                <ng2-smart-table-filter
+                    [source]="source"
+                    [column]="column"
+                    [inputClass]="grid.getSetting('filter.inputClass')"
+                    (filter)="filter($event)">
+                </ng2-smart-table-filter>
+            </th>
+            <th>
+                <a *ngIf="grid.getSetting('actions.add')"
+                    href="#"
+                    [innerHTML]="grid.getSetting('add.addButtonContent')"
+                    (click)="onAdd($event)">
+                </a>
+            </th>
+        </tr>
 
-            <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'top'">
-                <td *ngIf="grid.isMultiSelectVisible()"></td>
-                <td *ngFor="let cell of grid.getNewRow().getCells()">
-                    <ng2-smart-table-cell
-                        [cell]="cell"
-                        [inputClass]="grid.getSetting('add.inputClass')"
-                        [isInEditing]="grid.getNewRow().isInEditing"
-                        (edited)="onCreate(grid.getNewRow(), $event)">
-                    </ng2-smart-table-cell>
-                </td>
-                <td class="table__actions">
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('add.createButtonContent')"
-                        (click)="onCreate(grid.getNewRow(), $event)">
-                    </button>
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                        (click)="grid.createFormShown = false; disableSidebar(false)">
-                    </button>
-                </td>
-            </tr>
-        </thead>
-        <tbody class="table__body">
-            <tr *ngFor="let row of grid.getRows()"
-                (click)="(grid.getSetting('actions.editInline')) ? onEdit(row, $event) : onUserSelectRow(row)"
-    			[ngClass]="{ 'selected': !grid.isMultiSelectVisible() && row.isSelected, 'table__body__row--success': row.isInEditing }">
-                <td *ngIf="grid.isMultiSelectVisible()"
-                    (click)="multipleSelectRow(row)">
-                    <input type="checkbox" [ngModel]="row.isSelected">
-                </td>
-                <td *ngFor="let cell of row.getCells()"
-                    [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
-                    <ng2-smart-table-cell
-                        [cell]="cell"
-                        [mode]="grid.getSetting('mode')"
-                        [inputClass]="grid.getSetting('edit.inputClass')"
-                        [isInEditing]="row.isInEditing"
-                        (edited)="onSave(row, $event)">
-                    </ng2-smart-table-cell>
-                </td>
-                <td class="table__actions" *ngIf="!row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
-                    <button class="button button--clean" type="button" *ngIf="grid.getSetting('actions.edit')"
-                        [innerHTML]="grid.getSetting('edit.editButtonContent')"
-                        (click)="onEdit(row, $event)">
-                    </button>
-                    <button class="button button--clean" type="button" *ngIf="grid.getSetting('actions.delete')"
-                        [innerHTML]="grid.getSetting('delete.deleteButtonContent')"
-                        (click)="onDelete(row, $event)">
-                    </button>
-                </td>
-                <td class="table__actions" *ngIf="row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('edit.saveButtonContent')"
-                        (click)="onSave(row, $event)">
-                    </button>
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('edit.cancelButtonContent')"
-                        (click)="onCancelEdit(row, $event)">
-                    </button>
-                </td>
-            </tr>
+        <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'top'">
+            <td *ngIf="grid.isMultiSelectVisible()"></td>
+            <td *ngFor="let cell of grid.getNewRow().getCells()">
+                <ng2-smart-table-cell
+                    [cell]="cell"
+                    [inputClass]="grid.getSetting('add.inputClass')"
+                    [isInEditing]="grid.getNewRow().isInEditing"
+                    (edited)="onCreate(grid.getNewRow(), $event)">
+                </ng2-smart-table-cell>
+            </td>
+            <td class="table__actions">
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('add.createButtonContent')"
+                    (click)="onCreate(grid.getNewRow(), $event)">
+                </button>
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('add.cancelButtonContent')"
+                    (click)="grid.createFormShown = false; disableSidebar(false)">
+                </button>
+            </td>
+        </tr>
+    </thead>
+    <tbody class="table__body">
+        <tr *ngFor="let row of grid.getRows()"
+            (click)="(grid.getSetting('actions.editInline')) ? onEdit(row, $event) : onUserSelectRow(row)"
+			[ngClass]="{ 'selected': !grid.isMultiSelectVisible() && row.isSelected, 'table__body__row--success': row.isInEditing }">
+            <td *ngIf="grid.isMultiSelectVisible()"
+                (click)="multipleSelectRow(row)">
+                <input type="checkbox" [ngModel]="row.isSelected">
+            </td>
+            <td *ngFor="let cell of row.getCells()"
+                [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
+                <ng2-smart-table-cell
+                    [cell]="cell"
+                    [mode]="grid.getSetting('mode')"
+                    [inputClass]="grid.getSetting('edit.inputClass')"
+                    [isInEditing]="row.isInEditing"
+                    (edited)="onSave(row, $event)">
+                </ng2-smart-table-cell>
+            </td>
+            <td class="table__actions" *ngIf="!row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
+                <button class="button button--clean" type="button" *ngIf="grid.getSetting('actions.edit')"
+                    [innerHTML]="grid.getSetting('edit.editButtonContent')"
+                    (click)="onEdit(row, $event)">
+                </button>
+                <button class="button button--clean" type="button" *ngIf="grid.getSetting('actions.delete')"
+                    [innerHTML]="grid.getSetting('delete.deleteButtonContent')"
+                    (click)="onDelete(row, $event)">
+                </button>
+            </td>
+            <td class="table__actions" *ngIf="row.isInEditing && grid.showActionColumn('right')" [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('edit.saveButtonContent')"
+                    (click)="onSave(row, $event)">
+                </button>
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('edit.cancelButtonContent')"
+                    (click)="onCancelEdit(row, $event)">
+                </button>
+            </td>
+        </tr>
 
-            <tr *ngIf="grid.getRows().length == 0">
-                <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
-                    {{ grid.getSetting('noDataMessage') }}
-                </td>
-            </tr>
-        </tbody>
-        <tfoot class="table__footer" *ngIf="!grid.getSetting('hideFooter')"
-            [ngClass]="grid.getSetting('footer.class')">
-            <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'bottom'">
-                <td *ngIf="grid.isMultiSelectVisible()"></td>
-                <td *ngFor="let cell of grid.getNewRow().getCells()">
-                    <ng2-smart-table-cell
-                        [cell]="cell"
-                        [inputClass]="grid.getSetting('add.inputClass')"
-                        [isInEditing]="grid.getNewRow().isInEditing"
-                        (edited)="onCreate(grid.getNewRow(), $event)">
-                    </ng2-smart-table-cell>
-                </td>
-                <td class="table__actions">
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('add.createButtonContent')"
-                        (click)="onCreate(grid.getNewRow(), $event)">
-                    </button>
-                    <button class="button button--clean" type="button"
-                        [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                        (click)="grid.createFormShown = false;">
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
-                    <button class="button button--clean" type="button"
-                        *ngIf="grid.getSetting('footer.actions.add')"
-                        (click)="onAdd($event)">
-                        <i class="icon-add-green"></i>
-                    </button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</article>
+        <tr *ngIf="grid.getRows().length == 0">
+            <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
+                {{ grid.getSetting('noDataMessage') }}
+            </td>
+        </tr>
+    </tbody>
+    <tfoot class="table__footer" *ngIf="!grid.getSetting('hideFooter')"
+        [ngClass]="grid.getSetting('footer.class')">
+        <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'bottom'">
+            <td *ngIf="grid.isMultiSelectVisible()"></td>
+            <td *ngFor="let cell of grid.getNewRow().getCells()">
+                <ng2-smart-table-cell
+                    [cell]="cell"
+                    [inputClass]="grid.getSetting('add.inputClass')"
+                    [isInEditing]="grid.getNewRow().isInEditing"
+                    (edited)="onCreate(grid.getNewRow(), $event)">
+                </ng2-smart-table-cell>
+            </td>
+            <td class="table__actions">
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('add.createButtonContent')"
+                    (click)="onCreate(grid.getNewRow(), $event)">
+                </button>
+                <button class="button button--clean" type="button"
+                    [innerHTML]="grid.getSetting('add.cancelButtonContent')"
+                    (click)="grid.createFormShown = false;">
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
+                <button class="button button--clean" type="button"
+                    *ngIf="grid.getSetting('footer.actions.add')"
+                    (click)="onAdd($event)">
+                    <i class="icon-add-green"></i>
+                </button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
 
 <ng2-smart-table-pager *ngIf="grid.getSetting('pager.display')"
     [source]="source"
