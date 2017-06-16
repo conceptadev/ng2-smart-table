@@ -68,7 +68,7 @@
                 </button>
                 <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                    (click)="grid.createFormShown = false; disableSidebar(false)">
+                    (click)="$event.stopPropagation(); grid.createFormShown = false; disableSidebar(false);">
                 </button>
             </td>
         </tr>
@@ -138,7 +138,7 @@
                 </button>
                 <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                    (click)="grid.createFormShown = false;">
+                    (click)="$event.stopPropagation(); grid.createFormShown = false; disableSidebar(false);">
                 </button>
             </td>
         </tr>
