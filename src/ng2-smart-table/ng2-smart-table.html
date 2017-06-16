@@ -66,9 +66,9 @@
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
                 </button>
-                <button class="button button--clean" type="button"
+                <button class="button button--clean" type="button" id="cancel-top"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                    (click)="$event.stopPropagation(); grid.createFormShown = false; disableSidebar(false);">
+                    (click)="onCancelAdd($event)">
                 </button>
             </td>
         </tr>
@@ -136,9 +136,9 @@
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
                 </button>
-                <button class="button button--clean" type="button"
+                <button class="button button--clean" type="button" id="cancel-bottom"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
-                    (click)="$event.stopPropagation(); grid.createFormShown = false; disableSidebar(false);">
+                    (click)="onCancelAdd($event)">
                 </button>
             </td>
         </tr>
