@@ -61,12 +61,12 @@
                     (edited)="onCreate(grid.getNewRow(), $event)">
                 </ng2-smart-table-cell>
             </td>
-            <td class="table__actions">
+            <td class="table__actions cancel-top">
                 <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
                 </button>
-                <button class="button button--clean" type="button" id="cancel-top"
+                <button class="button button--clean cancel-top" type="button" [id]="cancel-top"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
                     (click)="onCancelAdd($event)">
                 </button>
@@ -131,12 +131,12 @@
                     (edited)="onCreate(grid.getNewRow(), $event)">
                 </ng2-smart-table-cell>
             </td>
-            <td class="table__actions">
+            <td class="table__actions cancel-bottom">
                 <button class="button button--clean" type="button"
                     [innerHTML]="grid.getSetting('add.createButtonContent')"
                     (click)="onCreate(grid.getNewRow(), $event)">
                 </button>
-                <button class="button button--clean" type="button" id="cancel-bottom"
+                <button class="button button--clean cancel-bottom" type="button" [id]="cancel-bottom"
                     [innerHTML]="grid.getSetting('add.cancelButtonContent')"
                     (click)="onCancelAdd($event)">
                 </button>
