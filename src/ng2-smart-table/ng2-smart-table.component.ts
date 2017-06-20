@@ -93,6 +93,22 @@ export class Ng2SmartTableComponent implements OnChanges {
     public disableRowEdit: boolean = false;
     public editInline: boolean = false;
 
+    public shouldHideColumn (row, cell): Boolean {
+      const data = row.getData();
+
+      if (Array.isArray(data.stHideCells)) {
+        for (let i = 0; i < data.stHideCells.length; i++) {
+          const cellName = data.stHideCells[i];
+
+          if (cell.column.id === cellName) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
+
     public disableSidebar(disable: boolean): void {
         let sidebar = document.querySelector('.sidebar');
 
@@ -248,7 +264,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.grid.create(row, this.createConfirm);
         return false;
     }
-	
+
     onCancelAdd(event): boolean {
         event.stopPropagation();
 

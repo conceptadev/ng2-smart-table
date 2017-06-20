@@ -52,6 +52,11 @@
             </th>
         </tr>
 
+        <tr class="table__subheader2" *ngIf="!grid.getSetting('hideSubHeader2')">
+            <th [ngClass]="grid.getSetting('subHeader2').class"
+              [attr.colspan]="grid.getSetting('subHeader2').colspan">{{ grid.getSetting('subHeader2').title }}</th>
+        </tr>
+
         <tr class="table__header__row--success" *ngIf="grid.createFormShown && grid.getSetting('add.position') === 'top'">
             <td *ngIf="grid.isMultiSelectVisible()"></td>
             <td *ngFor="let cell of grid.getNewRow().getCells()">
@@ -84,7 +89,8 @@
             </td>
             <td *ngFor="let cell of row.getCells()"
                 [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
-                <ng2-smart-table-cell
+
+                <ng2-smart-table-cell *ngIf="!shouldHideColumn(row, cell)"
                     [cell]="cell"
                     [mode]="grid.getSetting('mode')"
                     [inputClass]="grid.getSetting('edit.inputClass')"
