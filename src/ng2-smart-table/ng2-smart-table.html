@@ -7,6 +7,7 @@
     </button>
 </header>
 
+<article [ngClass]="grid.getSetting('scroll')">
 <table class="table" [id]="grid.getSetting('attr.id')" [ngClass]="grid.getSetting('attr.class')">
     <thead class="table__header"
         *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')"
@@ -153,6 +154,7 @@
         </tr>
     </tfoot>
 </table>
+</article>
 
 <ng2-smart-table-pager *ngIf="grid.getSetting('pager.display')"
     [source]="source"
