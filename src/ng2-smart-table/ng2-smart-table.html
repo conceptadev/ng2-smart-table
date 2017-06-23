@@ -90,8 +90,9 @@
             <td *ngFor="let cell of row.getCells()"
                 [ngClass]="{ 'disabled': grid.isMultiSelectVisible() && !row.isSelected }">
 
-                <ng2-smart-table-cell *ngIf="!shouldHideColumn(row, cell)"
+                <ng2-smart-table-cell
                     [cell]="cell"
+                    [ngClass]="{ 'hide': shouldHideColumn(row, cell) }"
                     [mode]="grid.getSetting('mode')"
                     [inputClass]="grid.getSetting('edit.inputClass')"
                     [isInEditing]="row.isInEditing"
