@@ -19,7 +19,7 @@
         <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
             <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
                 <input type="checkbox" [ngModel]="isAllSelected">
-                Add
+                Add All
             </th>
             <th *ngFor="let column of grid.getColumns()" [ngClass]="column.class">
                 <ng2-smart-table-title
