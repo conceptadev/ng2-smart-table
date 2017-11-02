@@ -17,9 +17,9 @@
         </tr>
 
         <tr *ngIf="!grid.getSetting('hideHeader')" [ngClass]="grid.getSetting('header.class')">
-            <th class="table__cell--flex-1" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
+            <th class="table__cell--flex-1 center" *ngIf="grid.isMultiSelectVisible()" (click)="selectAllRows()">
                 <input type="checkbox" [ngModel]="isAllSelected">
-                Add All
+                Add all
             </th>
             <th *ngFor="let column of grid.getColumns()" [ngClass]="column.class">
                 <ng2-smart-table-title
@@ -83,7 +83,7 @@
         <tr *ngFor="let row of grid.getRows()"
             (click)="(grid.getSetting('actions.editInline')) ? onEdit(row, $event) : onUserSelectRow(row)"
 			[ngClass]="{ 'selected': !grid.isMultiSelectVisible() && row.isSelected, 'table__body__row--success': row.isInEditing }">
-            <td *ngIf="grid.isMultiSelectVisible()"
+            <td *ngIf="grid.isMultiSelectVisible()" class="center"
                 (click)="multipleSelectRow(row)">
                 <input type="checkbox" [ngModel]="row.isSelected">
             </td>

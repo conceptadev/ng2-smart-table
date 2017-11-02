@@ -31,6 +31,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     @Output() public deleteConfirm: EventEmitter<any> = new EventEmitter<any>();
     @Output() public editConfirm: EventEmitter<any> = new EventEmitter<any>();
     @Output() public createConfirm: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pageChange: EventEmitter<any> = new EventEmitter<any>();
 
     @Output() public grid: Grid;
     defaultSettings: Object = {
@@ -323,7 +324,8 @@ export class Ng2SmartTableComponent implements OnChanges {
     }
 
     changePage($event) {
-        this.resetAllSelector();
+      this.pageChange.emit($event);
+      this.resetAllSelector();
     }
 
     sort($event) {
